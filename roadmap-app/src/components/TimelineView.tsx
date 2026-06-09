@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useApp } from '../context/AppContext';
+import { useState } from 'react';
+import { useApp } from '../context/hooks';
 import { useAuth } from '../context/AuthContext';
 import { useProgress } from '../hooks/useProgress';
 import type { ScheduledModule } from '../types';

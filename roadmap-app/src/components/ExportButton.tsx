@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { useApp } from '../context/AppContext';
+import { useApp } from '../context/hooks';
 import { useAuth } from '../context/AuthContext';
 import { useProgress } from '../hooks/useProgress';
 import type { ScheduledModule } from '../types';
@@ -14,7 +14,18 @@ export function ExportButton() {
   const [exporting, setExporting] = useState<'idle' | 'pdf' | 'ical' | 'json' | 'sync'>('idle');
   const [error, setError] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  
+
+  // Close dropdown when clicking outside - moved before early return
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   if (!roadmap) return null;
   
   const generatePDF = async () => {
@@ -270,17 +281,6 @@ export function ExportButton() {
       setExporting('idle');
     }
   };
-  
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
   
   return (
     <div className="export-button-wrapper" ref={dropdownRef}>

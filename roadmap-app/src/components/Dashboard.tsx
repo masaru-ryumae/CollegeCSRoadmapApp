@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useApp } from '../context/AppContext';
+import { useApp } from '../context/hooks';
 import { ExportButton } from './ExportButton';
 import { getCriticalPath } from '../utils/roadmapGenerator';
 import './Dashboard.css';
@@ -34,16 +34,18 @@ export function Dashboard() {
       .slice(0, 3);
   }, [roadmap, answers.timeline]);
   
-  const [activity, setActivity] = React.useState<Array<{type: string, message: string, time: string}>>([]);
-  
-  React.useEffect(() => {
+  const [activity] = React.useState<Array<{type: string, message: string, time: string}>>(() => {
     const saved = localStorage.getItem('cs-roadmap-activity');
     if (saved) {
       try {
-        setActivity(JSON.parse(saved));
-      } catch {}
+        return JSON.parse(saved);
+      } catch {
+        // Silently fail on parse error
+        return [];
+      }
     }
-  }, []);
+    return [];
+  });
   
   const handleGenerateRoadmap = () => {
     dispatch({ type: 'SET_ACTIVE_VIEW', view: 'assessment' });
