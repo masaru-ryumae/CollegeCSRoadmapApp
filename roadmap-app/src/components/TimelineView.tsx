@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useApp } from '../context/AppContext';
+import { useApp } from '../context/hooks';
 import type { ScheduledModule } from '../types';
 import './TimelineView.css';
 

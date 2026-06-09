@@ -101,12 +101,15 @@ export const generateRoadmap = (answers: DecisionAnswers): PersonalizedRoadmap =
   const totalCapacity = weeksAvailable * hoursPerWeek;
   const totalHours = ordered.reduce((sum, m) => sum + m.assignedHours, 0);
   
-  let finalModules = [...ordered];
-  if (totalHours > totalCapacity) {
-    while (finalModules.reduce((sum, m) => sum + m.assignedHours, 0) > totalCapacity && finalModules.length > 1) {
-      finalModules.pop();
+  const finalModules = (() => {
+    const modules = [...ordered];
+    if (totalHours > totalCapacity) {
+      while (modules.reduce((sum, m) => sum + m.assignedHours, 0) > totalCapacity && modules.length > 1) {
+        modules.pop();
+      }
     }
-  }
+    return modules;
+  })();
   
   const weeklySchedule: WeeklyPlan[] = Array.from({ length: weeksAvailable }, (_, i) => ({
     week: i + 1,

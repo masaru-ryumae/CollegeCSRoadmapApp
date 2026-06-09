@@ -1,4 +1,4 @@
-import { useApp } from '../context/AppContext';
+import { useApp } from '../context/hooks';
 import type { DecisionAnswers } from '../types';
 import { generateRoadmap } from '../utils/roadmapGenerator';
 import moduleData from '../data/MODULE_DATA.json';

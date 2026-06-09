@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AppProvider, useApp } from './context/AppContext';
+import { AppProvider } from './context/AppContext';
+import { useApp } from './context/hooks';
 import { DecisionTree } from './components/DecisionTree';
 import { TimelineView } from './components/TimelineView';
 import { Dashboard } from './components/Dashboard';

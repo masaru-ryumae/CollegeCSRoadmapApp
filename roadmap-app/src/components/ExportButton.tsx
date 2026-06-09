@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { useApp } from '../context/AppContext';
+import { useApp } from '../context/hooks';
 import type { ScheduledModule } from '../types';
 import './ExportButton.css';
 
@@ -10,7 +10,18 @@ export function ExportButton() {
   const [exporting, setExporting] = useState<'idle' | 'pdf' | 'ical' | 'json'>('idle');
   const [error, setError] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  
+
+  // Close dropdown when clicking outside - moved before early return
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   if (!roadmap) return null;
   
   const generatePDF = async () => {
@@ -236,7 +247,7 @@ export function ExportButton() {
       const json = JSON.stringify(roadmap, null, 2);
       const blob = new Blob([json], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
-      
+
       const link = document.createElement('a');
       link.href = url;
       link.download = `roadmap-${Date.now()}.json`;
@@ -244,24 +255,13 @@ export function ExportButton() {
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-      
+
       setExporting('idle');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to generate JSON');
       setExporting('idle');
     }
   };
-  
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
   
   return (
     <div className="export-button-wrapper" ref={dropdownRef}>
