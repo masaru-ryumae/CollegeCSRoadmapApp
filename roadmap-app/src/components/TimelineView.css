@@ -48,6 +48,70 @@
   color: #f9fafb;
 }
 
+.timeline-error {
+  background-color: #fee2e2;
+  border: 1px solid #fca5a5;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  animation: slideDown 0.3s ease-out;
+}
+
+.dark .timeline-error {
+  background-color: #7f1d1d;
+  border-color: #991b1b;
+}
+
+.error-message {
+  color: #991b1b;
+  font-size: 0.95rem;
+  flex: 1;
+}
+
+.dark .error-message {
+  color: #fca5a5;
+}
+
+.error-close {
+  background: none;
+  border: none;
+  color: #991b1b;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  transition: background 0.2s;
+  border-radius: 0.25rem;
+}
+
+.error-close:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dark .error-close {
+  color: #fca5a5;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .header-controls {
   display: flex;
   align-items: center;

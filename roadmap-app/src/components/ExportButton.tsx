@@ -1,13 +1,17 @@
 import { useRef, useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
+import { useAuth } from '../context/AuthContext';
+import { useProgress } from '../hooks/useProgress';
 import type { ScheduledModule } from '../types';
 import './ExportButton.css';
 
 export function ExportButton() {
   const { state } = useApp();
+  const { user } = useAuth();
   const { roadmap } = state;
+  const { lastSync } = useProgress(user?.id || null);
   const [isOpen, setIsOpen] = useState(false);
-  const [exporting, setExporting] = useState<'idle' | 'pdf' | 'ical' | 'json'>('idle');
+  const [exporting, setExporting] = useState<'idle' | 'pdf' | 'ical' | 'json' | 'sync'>('idle');
   const [error, setError] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   
@@ -236,7 +240,7 @@ export function ExportButton() {
       const json = JSON.stringify(roadmap, null, 2);
       const blob = new Blob([json], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
-      
+
       const link = document.createElement('a');
       link.href = url;
       link.download = `roadmap-${Date.now()}.json`;
@@ -244,10 +248,25 @@ export function ExportButton() {
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-      
+
       setExporting('idle');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to generate JSON');
+      setExporting('idle');
+    }
+  };
+
+  const handleSync = () => {
+    setExporting('sync');
+    setError(null);
+    try {
+      // Trigger sync by dispatching a custom event that the ProgressProvider will listen to
+      window.dispatchEvent(new CustomEvent('sync-progress'));
+      setTimeout(() => {
+        setExporting('idle');
+      }, 1000);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to sync progress');
       setExporting('idle');
     }
   };
@@ -284,6 +303,26 @@ export function ExportButton() {
         
         {isOpen && (
           <div className="export-dropdown">
+            {user && (
+              <>
+                <button
+                  onClick={handleSync}
+                  disabled={exporting !== 'idle'}
+                  className={`dropdown-item sync-item ${exporting === 'sync' ? 'loading' : ''}`}
+                >
+                  <svg className="dropdown-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  <div className="sync-info">
+                    <span>{exporting === 'sync' ? 'Syncing...' : 'Sync Progress'}</span>
+                    {lastSync && (
+                      <small>Last synced: {lastSync.toLocaleTimeString()}</small>
+                    )}
+                  </div>
+                </button>
+                <div className="dropdown-divider"></div>
+              </>
+            )}
             <button
               onClick={generatePDF}
               disabled={exporting !== 'idle'}
@@ -314,7 +353,7 @@ export function ExportButton() {
               </svg>
               <span>{exporting === 'json' ? 'Generating...' : 'Download JSON'}</span>
             </button>
-            
+
             {error && (
               <div className="dropdown-error">
                 Error: {error}
