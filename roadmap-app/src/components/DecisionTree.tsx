@@ -12,16 +12,25 @@ const questions = moduleData.decision_tree as {
   impact: string;
 }[];
 
+const questionIdMap: Record<string, keyof DecisionAnswers> = {
+  q1: 'techLevel',
+  q2: 'targetCompanyType',
+  q3: 'hoursPerWeek',
+  q4: 'hasExistingProject',
+  q5: 'timeline'
+};
+
 export function DecisionTree() {
   const { state, dispatch } = useApp();
   const currentQuestion = questions[state.currentStep];
-  
+  const answerKey = questionIdMap[currentQuestion.question_id];
+
   const handleOptionChange = (value: string) => {
-    dispatch({ type: 'SET_ANSWER', key: currentQuestion.question_id as keyof DecisionAnswers, value });
+    dispatch({ type: 'SET_ANSWER', key: answerKey, value });
   };
-  
+
   const handleNext = () => {
-    const answer = state.answers[currentQuestion.question_id as keyof DecisionAnswers];
+    const answer = state.answers[answerKey];
     if (!answer) return;
     
     if (state.currentStep < questions.length - 1) {
@@ -71,7 +80,7 @@ export function DecisionTree() {
               <label
                 key={option.value}
                 className={`option-card ${
-                  state.answers[currentQuestion.question_id as keyof DecisionAnswers] === option.value
+                  state.answers[answerKey] === option.value
                     ? 'selected' : ''
                 }`}
               >
@@ -79,7 +88,7 @@ export function DecisionTree() {
                   type="radio"
                   name={currentQuestion.question_id}
                   value={option.value}
-                  checked={state.answers[currentQuestion.question_id as keyof DecisionAnswers] === option.value}
+                  checked={state.answers[answerKey] === option.value}
                   onChange={() => handleOptionChange(option.value)}
                   className="option-radio"
                 />
@@ -104,7 +113,7 @@ export function DecisionTree() {
           </button>
           <button
             onClick={handleNext}
-            disabled={!state.answers[currentQuestion.question_id as keyof DecisionAnswers]}
+            disabled={!state.answers[answerKey]}
             className="btn btn-primary"
           >
             {state.currentStep === questions.length - 1 ? 'Generate Roadmap' : 'Next →'}
