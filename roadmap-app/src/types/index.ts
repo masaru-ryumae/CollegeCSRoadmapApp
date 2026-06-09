@@ -96,3 +96,15 @@ export interface RoadmapProgress {
   overallProgress: number;
   currentWeek: number;
 }
+
+// User and Admin types
+export type UserRole = 'user' | 'admin';
+
+export interface UserProfile {
+  id: string;
+  email: string;
+  role: UserRole;
+  signupDate: string;
+  lastActive: string;
+  banned: boolean;
+}

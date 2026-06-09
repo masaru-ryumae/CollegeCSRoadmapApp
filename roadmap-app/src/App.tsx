@@ -3,6 +3,8 @@ import { AppProvider, useApp } from './context/AppContext';
 import { DecisionTree } from './components/DecisionTree';
 import { TimelineView } from './components/TimelineView';
 import { Dashboard } from './components/Dashboard';
+import { AdminDashboard } from './pages/AdminDashboard';
+import { AdminGuard } from './components/AdminGuard';
 import './index.css';
 
 function AppContent() {
@@ -17,6 +19,14 @@ function AppContent() {
       <Route path="/" element={<Dashboard />} />
       <Route path="/timeline" element={<TimelineView />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route
+        path="/admin"
+        element={
+          <AdminGuard>
+            <AdminDashboard />
+          </AdminGuard>
+        }
+      />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
