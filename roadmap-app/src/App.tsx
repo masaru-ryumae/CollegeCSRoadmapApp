@@ -8,6 +8,10 @@ import { NotificationBell } from './components/NotificationBell';
 import { ProgressDashboard } from './components/ProgressDashboard';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { AdminGuard } from './components/AdminGuard';
+import { NotificationContainer } from './components/NotificationContainer';
+import { NotificationPreferences } from './components/NotificationPreferences';
+import { useScheduleNotifications } from './hooks/useScheduleNotifications';
+import { setCurrentUserId } from './services/notificationService';
 import './index.css';
 
 function AppContent() {
@@ -22,6 +26,9 @@ function AppContent() {
       </div>
     );
   }
+
+  // Initialize notifications
+  useScheduleNotifications(state.roadmap);
 
   if (state.activeView === 'assessment' || !state.assessmentComplete) {
     return <DecisionTree />;
@@ -51,6 +58,7 @@ function AppContent() {
         <Route path="/timeline" element={<TimelineView />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/progress" element={<ProgressDashboard />} />
+        <Route path="/settings/notifications" element={<NotificationPreferences />} />
         <Route
           path="/admin"
           element={
@@ -66,11 +74,15 @@ function AppContent() {
 }
 
 function App() {
+  // Set a default user ID for notifications
+  setCurrentUserId('default-user');
+
   return (
     <BrowserRouter>
       <AuthProvider>
         <AppProvider>
           <AppContent />
+          <NotificationContainer />
         </AppProvider>
       </AuthProvider>
     </BrowserRouter>
