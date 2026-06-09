@@ -9,6 +9,7 @@ interface AppState {
   roadmapProgress: RoadmapProgress | null;
   darkMode: boolean;
   activeView: 'assessment' | 'timeline' | 'dashboard';
+  userRole: 'user' | 'admin';
 }
 
 type AppAction =
@@ -29,7 +30,8 @@ const initialState: AppState = {
   roadmap: null,
   roadmapProgress: null,
   darkMode: false,
-  activeView: 'assessment'
+  activeView: 'assessment',
+  userRole: 'user'
 };
 
 function appReducer(state: AppState, action: AppAction): AppState {

@@ -6,6 +6,8 @@ import { TimelineView } from './components/TimelineView';
 import { Dashboard } from './components/Dashboard';
 import { NotificationBell } from './components/NotificationBell';
 import { ProgressDashboard } from './components/ProgressDashboard';
+import { AdminDashboard } from './pages/AdminDashboard';
+import { AdminGuard } from './components/AdminGuard';
 import './index.css';
 
 function AppContent() {
@@ -49,6 +51,14 @@ function AppContent() {
         <Route path="/timeline" element={<TimelineView />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/progress" element={<ProgressDashboard />} />
+        <Route
+          path="/admin"
+          element={
+            <AdminGuard>
+              <AdminDashboard />
+            </AdminGuard>
+          }
+        />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
