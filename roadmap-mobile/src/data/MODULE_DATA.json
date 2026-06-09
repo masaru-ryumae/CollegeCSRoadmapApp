@@ -1,0 +1,171 @@
+{
+  "modules": [
+    {
+      "id": "00",
+      "name": "Prerequisites & Mindset",
+      "description": "Understand timeline expectations and set up accounts",
+      "hours": {"beginner": 2, "intermediate": 1.5, "advanced": 0.5},
+      "dependencies": [],
+      "key_points": ["Clarify 4-6 week timeline", "Create Render + GitHub accounts", "Prepare workspace (~/.internship-prep/)"]
+    },
+    {
+      "id": "01",
+      "name": "Dev Setup",
+      "description": "Install Node/npm, configure Git SSH, test Render",
+      "hours": {"beginner": 4, "intermediate": 3, "advanced": 2},
+      "dependencies": ["00"],
+      "key_points": ["Install Node LTS via nvm (NOT direct install)", "Create SSH keys for GitHub (first-time blocker)", "npm install times vary (25-40 min for first-timers)", "Create Render account + connect GitHub"]
+    },
+    {
+      "id": "02",
+      "name": "Portfolio Project (Full-Stack)",
+      "description": "Build Node.js + React + PostgreSQL application",
+      "hours": {"beginner": 32, "intermediate": 28, "advanced": 24},
+      "dependencies": ["01"],
+      "key_points": ["Backend: Express + JWT auth (4-5h)", "Database: PostgreSQL schema design (2-3h)", "Auth: Login/signup/logout endpoints (4-5h)", "Frontend: React scaffolding + routing (3-4h)", "CRUD: Create/read/update/delete features (5-6h)", "Error handling: Input validation + CONSTRAINT:REFUSE patterns (3-4h)", "Testing: Jest + Supertest, 80%+ coverage (2-3h)"]
+    },
+    {
+      "id": "03",
+      "name": "Deploy to Production",
+      "description": "Deploy to Render with PostgreSQL persistence",
+      "hours": {"beginner": 6, "intermediate": 5, "advanced": 4},
+      "dependencies": ["02"],
+      "key_points": ["Create Render Web Service + PostgreSQL database", "⚠️ CRITICAL: Render free tier DB deletes after 7 days inactivity", "Solution: Upgrade to paid tier OR use external DB (Railway/Neon free)", "OR: Add health check cron job to keep DB alive", "Configure environment variables", "Set up database migrations (Flyway/Prisma)", "Test deployment (hit live API)", "Enable auto-deploy via GitHub webhook", "Optional: Custom domain + HTTPS"]
+    },
+    {
+      "id": "04a",
+      "name": "Interview Prep — LeetCode Focus",
+      "description": "Emphasize coding interviews (FAANG path)",
+      "hours": {"beginner": 16, "intermediate": 14, "advanced": 12},
+      "dependencies": ["02"],
+      "key_points": ["LeetCode Easy: 20 problems (arrays, strings, trees) — 6-8h", "System Design Basics: 3-4 case studies — 3-4h", "Behavioral Q&A: 10 common questions + STAR method — 2-3h", "Mock interviews: 2-3 sessions with peers — 1-2h"]
+    },
+    {
+      "id": "04b",
+      "name": "Interview Prep — System Design Focus",
+      "description": "Emphasize system design (startup path)",
+      "hours": {"beginner": 16, "intermediate": 14, "advanced": 12},
+      "dependencies": ["02"],
+      "key_points": ["System Design: 5-6 case studies (cache, CDN, auth, rate limiting) — 6-8h", "LeetCode Medium: 10 problems — 4-5h", "Take-home projects: 1-2 real interview simulations — 3-4h", "Behavioral Q&A: 10 common questions — 2-3h"]
+    },
+    {
+      "id": "04c",
+      "name": "Interview Prep — Balanced",
+      "description": "50/50 LeetCode + System Design",
+      "hours": {"beginner": 16, "intermediate": 14, "advanced": 12},
+      "dependencies": ["02"],
+      "key_points": ["LeetCode Easy: 15 problems — 5-6h", "System Design: 3 case studies — 3-4h", "Behavioral Q&A: 10 questions — 2-3h", "Mock interviews: 1-2 sessions — 1-2h"]
+    },
+    {
+      "id": "05",
+      "name": "Resume & Portfolio Showcase",
+      "description": "Clean up GitHub, write READMEs, update resume",
+      "hours": {"beginner": 6, "intermediate": 5, "advanced": 4},
+      "dependencies": ["03"],
+      "key_points": ["Clean up GitHub (remove junk, write READMEs) — 1.5h", "Write project README (screenshots, live link, code walkthrough) — 1.5h", "Update resume (1-page, highlight portfolio project) — 1h", "Create personal site OR use GitHub as portfolio — 1-2h"]
+    },
+    {
+      "id": "06",
+      "name": "Networking & Outreach",
+      "description": "LinkedIn optimization, recruiter outreach, company research",
+      "hours": {"beginner": 4, "intermediate": 3.5, "advanced": 3},
+      "dependencies": ["05"],
+      "key_points": ["LinkedIn profile optimization — 1h", "Cold email template + research 10 target companies — 1.5h", "Recruiter outreach strategy — 1h", "Alumni network activation — 0.5h"]
+    },
+    {
+      "id": "07",
+      "name": "Application Strategy",
+      "description": "Target 20 companies, spread applications over 6-8 weeks",
+      "hours": {"beginner": 3, "intermediate": 2.5, "advanced": 2},
+      "dependencies": ["06"],
+      "key_points": ["Select 20 target companies (mix of tiers) — 1h", "Create application timeline (3-4 per week over 6-8 weeks) — 1h", "Customize materials per company — 1h"]
+    },
+    {
+      "id": "08",
+      "name": "Offer Negotiation",
+      "description": "Evaluate offers, negotiate salary, choose best fit",
+      "hours": {"beginner": 2, "intermediate": 1.5, "advanced": 1},
+      "dependencies": ["07"],
+      "key_points": ["Evaluate offer: role, mentorship, learning potential — 0.5h", "Research market rate (Blind, Levels.fyi) — 0.5h", "Negotiate salary + start date — 1h"]
+    }
+  ],
+  "paths": {
+    "leetcode-heavy": {
+      "name": "Big Tech / FAANG Focus",
+      "description": "Emphasize coding interviews, LeetCode",
+      "moduleOrder": ["00", "01", "02", "03", "04a", "05", "06", "07", "08"],
+      "best_for": "Sophomore/junior targeting FAANG",
+      "interview_weight": "LeetCode 70% / System Design 30%"
+    },
+    "system-design": {
+      "name": "Startup Focus",
+      "description": "Emphasize system design and take-home projects",
+      "moduleOrder": ["00", "01", "02", "03", "04b", "05", "06", "07", "08"],
+      "best_for": "Students targeting startups and funded companies",
+      "interview_weight": "System Design 70% / LeetCode 30%"
+    },
+    "balanced": {
+      "name": "Balanced Approach",
+      "description": "50/50 LeetCode and System Design",
+      "moduleOrder": ["00", "01", "02", "03", "04c", "05", "06", "07", "08"],
+      "best_for": "Most students seeking diverse company types",
+      "interview_weight": "LeetCode 50% / System Design 50%"
+    }
+  },
+  "decision_tree": [
+    {
+      "question_id": "q1",
+      "question": "What's your tech level?",
+      "type": "radio",
+      "options": [
+        {"value": "beginner", "label": "Beginner (new to coding or ~1 year experience)"},
+        {"value": "intermediate", "label": "Intermediate (2-3 years, built projects)"},
+        {"value": "advanced", "label": "Advanced (3+ years, shipping projects)"}
+      ],
+      "impact": "affects_module_hours"
+    },
+    {
+      "question_id": "q2",
+      "question": "Target company type?",
+      "type": "radio",
+      "options": [
+        {"value": "faang", "label": "Big Tech / FAANG (Google, Meta, Amazon)"},
+        {"value": "startup", "label": "Startup (funded companies, growth mode)"},
+        {"value": "balanced", "label": "Balanced (mix of both)"}
+      ],
+      "impact": "selects_path"
+    },
+    {
+      "question_id": "q3",
+      "question": "Hours per week you can commit?",
+      "type": "radio",
+      "options": [
+        {"value": "5-10", "label": "5-10 hours/week"},
+        {"value": "10-15", "label": "10-15 hours/week (recommended)"},
+        {"value": "15-20", "label": "15-20 hours/week (aggressive)"}
+      ],
+      "impact": "affects_timeline"
+    },
+    {
+      "question_id": "q4",
+      "question": "Do you already have a deployed project?",
+      "type": "radio",
+      "options": [
+        {"value": "yes", "label": "Yes (skip to Module 03)"},
+        {"value": "no", "label": "No (start from Module 00)"}
+      ],
+      "impact": "skips_modules"
+    },
+    {
+      "question_id": "q5",
+      "question": "Target internship timeline?",
+      "type": "radio",
+      "options": [
+        {"value": "summer-2026", "label": "Summer 2026 (8 weeks from now)"},
+        {"value": "fall-2026", "label": "Fall 2026 (16 weeks)"},
+        {"value": "spring-2027", "label": "Spring 2027 (24 weeks)"}
+      ],
+      "impact": "sets_deadline"
+    }
+  ]
+}
