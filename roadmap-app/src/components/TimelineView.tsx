@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
+import { useAuth } from '../context/AuthContext';
+import { useProgress } from '../hooks/useProgress';
 import type { ScheduledModule } from '../types';
 import './TimelineView.css';
 
@@ -9,10 +11,13 @@ const WEEK_LABELS = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6',
 
 export function TimelineView() {
   const { state, dispatch } = useApp();
+  const { user } = useAuth();
   const { roadmap } = state;
+  const { progress, updateProgress } = useProgress(user?.id || null);
   const [viewMode, setViewMode] = useState<ViewMode>('weekly');
   const [showCriticalOnly, setShowCriticalOnly] = useState(false);
   const [selectedModule, setSelectedModule] = useState<string | null>(null);
+  const [updateError, setUpdateError] = useState<string | null>(null);
   
   if (!roadmap) {
     return (
@@ -90,7 +95,21 @@ export function TimelineView() {
           </div>
         </div>
       </header>
-      
+
+      {/* Error notification */}
+      {updateError && (
+        <div className="timeline-error" role="alert">
+          <div className="error-message">{updateError}</div>
+          <button
+            className="error-close"
+            onClick={() => setUpdateError(null)}
+            aria-label="Close error"
+          >
+            ×
+          </button>
+        </div>
+      )}
+
       {/* Timeline */}
       <main className="timeline-main">
         <div className="timeline-card">
@@ -143,10 +162,30 @@ export function TimelineView() {
                       )}
                     </div>
                     <select
-                      value={module.status}
-                      onChange={(e) => e.stopPropagation()}
+                      value={
+                        progress?.moduleProgress.find((mp) => mp.moduleId === module.id)?.status ||
+                        module.status
+                      }
+                      onChange={(e) => {
+                        e.stopPropagation();
+                        if (user && progress) {
+                          const newStatus = e.target.value as 'pending' | 'in-progress' | 'done';
+                          const completedAt =
+                            newStatus === 'done'
+                              ? new Date().toISOString()
+                              : undefined;
+                          updateProgress(module.id, {
+                            status: newStatus,
+                            completedAt,
+                          }).catch((err) => {
+                            setUpdateError(err instanceof Error ? err.message : 'Failed to update');
+                          });
+                        }
+                      }}
                       onClick={(e) => e.stopPropagation()}
                       className="module-status-select"
+                      disabled={!user}
+                      title={!user ? 'Sign in to update progress' : ''}
                     >
                       <option value="pending">Pending</option>
                       <option value="in-progress">In Progress</option>

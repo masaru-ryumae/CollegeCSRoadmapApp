@@ -1,0 +1,371 @@
+.notification-bell {
+  position: relative;
+  display: inline-block;
+}
+
+.bell-button {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  transition: color 0.3s ease;
+  border-radius: 8px;
+}
+
+.bell-button:hover {
+  color: #111;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.bell-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #ef4444;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  width: 380px;
+  max-height: 500px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.header-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.header-title h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111;
+}
+
+.unread-indicator {
+  font-size: 0.85rem;
+  color: #ef4444;
+  font-weight: 500;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 0.25rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.close-button:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.mark-all-read {
+  padding: 0.75rem 1rem;
+  background: #f0f9ff;
+  border: none;
+  color: #0284c7;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  transition: background 0.2s;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.mark-all-read:hover {
+  background: #e0f2fe;
+}
+
+.notifications-list {
+  overflow-y: auto;
+  flex: 1;
+  max-height: 380px;
+}
+
+.notifications-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.notifications-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.notifications-list::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+.notifications-list::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  color: #9ca3af;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.empty-state svg {
+  stroke-width: 1.5;
+  opacity: 0.5;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.notification-item {
+  padding: 1rem;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  position: relative;
+}
+
+.notification-item:hover {
+  background: #fafafa;
+}
+
+.notification-item.unread {
+  background: #f3f4f6;
+}
+
+.notification-item.unread:hover {
+  background: #e5e7eb;
+}
+
+.notification-marker {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  margin-top: 0.5rem;
+  flex-shrink: 0;
+}
+
+.notification-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.notification-title {
+  font-weight: 600;
+  color: #111;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.notification-type {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.notification-message {
+  margin: 0.25rem 0;
+  color: #6b7280;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.notification-time {
+  display: block;
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-top: 0.25rem;
+}
+
+.unread-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  flex-shrink: 0;
+  margin-top: 0.5rem;
+}
+
+.notification-footer {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #f0f0f0;
+  background: #f9fafb;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.view-all {
+  color: #0284c7;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.view-all:hover {
+  color: #0369a1;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .notification-dropdown {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    max-height: 70vh;
+  }
+
+  .notifications-list {
+    max-height: calc(70vh - 180px);
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .bell-button {
+    color: #9ca3af;
+  }
+
+  .bell-button:hover {
+    color: #f3f4f6;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .notification-dropdown {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
+  .notification-header {
+    border-bottom-color: #374151;
+  }
+
+  .header-title h3 {
+    color: #f3f4f6;
+  }
+
+  .mark-all-read {
+    background: rgba(2, 132, 199, 0.1);
+    border-bottom-color: #374151;
+    color: #06b6d4;
+  }
+
+  .mark-all-read:hover {
+    background: rgba(2, 132, 199, 0.15);
+  }
+
+  .notifications-list::-webkit-scrollbar-thumb {
+    background: #4b5563;
+  }
+
+  .notifications-list::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+  }
+
+  .notification-item {
+    border-bottom-color: #374151;
+  }
+
+  .notification-item:hover {
+    background: #111827;
+  }
+
+  .notification-item.unread {
+    background: #111827;
+  }
+
+  .notification-item.unread:hover {
+    background: #0f172a;
+  }
+
+  .notification-title {
+    color: #f3f4f6;
+  }
+
+  .notification-message {
+    color: #d1d5db;
+  }
+
+  .notification-time {
+    color: #9ca3af;
+  }
+
+  .notification-footer {
+    border-top-color: #374151;
+    background: #111827;
+  }
+}
