@@ -55,7 +55,7 @@ export function DecisionTree() {
       <div className="progress-bar-container">
         <div className="progress-bar-labels">
           <span>Step {state.currentStep + 1} of {questions.length}</span>
-          <span>{Math.round(progress)}%</span>
+          <span className="progress-percentage">{Math.round(progress)}%</span>
         </div>
         <div className="progress-bar-track">
           <div 
