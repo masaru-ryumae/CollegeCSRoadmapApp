@@ -1,0 +1,447 @@
+.streak-tracker {
+  width: 100%;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 12px;
+  margin: 1rem 0;
+}
+
+.streak-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.streak-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.streak-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #f59e0b 0%, #ef4444 100%);
+}
+
+.streak-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.streak-card.longest::before {
+  background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%);
+}
+
+.streak-card.status::before {
+  background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+}
+
+.streak-card.status.warning::before {
+  background: linear-gradient(90deg, #f59e0b 0%, #ef4444 100%);
+}
+
+.streak-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.fire-emoji,
+.trophy-emoji {
+  font-size: 2rem;
+}
+
+.streak-number .number {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #f59e0b;
+}
+
+.streak-card.longest .streak-number .number {
+  color: #fbbf24;
+}
+
+.streak-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #718096;
+  margin-bottom: 0.5rem;
+}
+
+.streak-detail {
+  font-size: 0.95rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.status-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.status-label {
+  font-weight: 700;
+  color: #10b981;
+  font-size: 1rem;
+}
+
+.streak-card.status.warning .status-label {
+  color: #f59e0b;
+}
+
+.days-until-break {
+  font-size: 0.85rem;
+  color: #4a5568;
+}
+
+.checkin-button {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.checkin-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+}
+
+.checkin-button:active {
+  transform: translateY(0);
+}
+
+.checkin-complete {
+  padding: 1rem;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  text-align: center;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.weekly-summary {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.weekly-summary h3 {
+  margin: 0 0 1rem 0;
+  color: #2d3748;
+  font-size: 1.1rem;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.summary-item {
+  background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.summary-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.summary-label {
+  font-size: 0.75rem;
+  color: #718096;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.25rem;
+}
+
+.summary-value {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #667eea;
+}
+
+.next-milestone {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.milestone-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.milestone-info {
+  flex: 1;
+}
+
+.milestone-reward {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.milestone-progress {
+  font-size: 0.9rem;
+  opacity: 0.95;
+}
+
+.calendar-section {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-section h3 {
+  margin: 0 0 1rem 0;
+  color: #2d3748;
+  font-size: 1.1rem;
+}
+
+.calendar-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.calendar-week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e2e8f0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.calendar-day.active {
+  background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+}
+
+.calendar-day:hover {
+  transform: scale(1.1);
+}
+
+.day-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.calendar-day.active .day-dot {
+  background: white;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.calendar-legend {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #718096;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.legend-dot.active {
+  background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+}
+
+.legend-dot.inactive {
+  background: #e2e8f0;
+}
+
+.milestones-section {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.milestones-section h3 {
+  margin: 0 0 1rem 0;
+  color: #2d3748;
+  font-size: 1.1rem;
+}
+
+.milestones-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.milestone-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f7fafc;
+  border-radius: 8px;
+  border-left: 4px solid #cbd5e0;
+  transition: all 0.3s ease;
+}
+
+.milestone-item.unlocked {
+  background: linear-gradient(135deg, #d1fae5 0%, #c8f5dd 100%);
+  border-left-color: #10b981;
+}
+
+.milestone-item.unlocked.next {
+  background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
+  border-left-color: #f59e0b;
+}
+
+.milestone-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  font-weight: 700;
+  color: #4a5568;
+  flex-shrink: 0;
+  font-size: 1.2rem;
+}
+
+.milestone-item.unlocked .milestone-marker {
+  background: #10b981;
+  color: white;
+}
+
+.milestone-item.unlocked.next .milestone-marker {
+  background: #f59e0b;
+  color: white;
+}
+
+.milestone-details {
+  flex: 1;
+}
+
+.milestone-days {
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 0.25rem;
+}
+
+.milestone-reward {
+  font-size: 0.9rem;
+  color: #718096;
+}
+
+.streak-tips {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.streak-tips h4 {
+  margin: 0 0 1rem 0;
+  color: #2d3748;
+  font-size: 1.1rem;
+}
+
+.streak-tips ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style: none;
+}
+
+.streak-tips li {
+  margin-bottom: 0.75rem;
+  color: #4a5568;
+  line-height: 1.6;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.streak-tips li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .streak-tracker {
+    padding: 1rem;
+  }
+
+  .streak-display {
+    grid-template-columns: 1fr;
+  }
+
+  .calendar-grid {
+    overflow-x: auto;
+  }
+
+  .next-milestone {
+    flex-direction: column;
+    text-align: center;
+  }
+}
