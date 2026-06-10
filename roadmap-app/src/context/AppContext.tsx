@@ -8,7 +8,7 @@ interface AppState {
   roadmap: PersonalizedRoadmap | null;
   roadmapProgress: RoadmapProgress | null;
   darkMode: boolean;
-  activeView: 'assessment' | 'timeline' | 'dashboard';
+  activeView: 'assessment' | 'timeline' | 'dashboard' | 'analytics' | 'charts' | 'reports' | 'insights';
 }
 
 type AppAction =
