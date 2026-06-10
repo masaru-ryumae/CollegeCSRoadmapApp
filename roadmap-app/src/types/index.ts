@@ -108,3 +108,119 @@ export interface UserProfile {
   lastActive: string;
   banned: boolean;
 }
+
+// Content Creation & Management Types
+export type ContentStatus = 'draft' | 'review' | 'published' | 'archived';
+export type ContentType = 'tutorial' | 'documentation' | 'guide' | 'resource';
+
+export interface TutorialStep {
+  id: string;
+  title: string;
+  description: string;
+  codeBlocks?: CodeBlock[];
+  images?: string[];
+  videos?: string[];
+  checkpoint?: Quiz;
+}
+
+export interface CodeBlock {
+  id: string;
+  code: string;
+  language: string;
+  filename?: string;
+}
+
+export interface Quiz {
+  id: string;
+  question: string;
+  options: { id: string; text: string; correct: boolean }[];
+  explanation: string;
+}
+
+export interface Tutorial {
+  id: string;
+  title: string;
+  description: string;
+  steps: TutorialStep[];
+  tags: string[];
+  difficulty: TechLevel;
+  estimatedMinutes: number;
+  authorId: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt?: string;
+  seo: SEOSettings;
+  status: ContentStatus;
+  views: number;
+  engagement: number;
+  version: number;
+}
+
+export interface SEOSettings {
+  title: string;
+  description: string;
+  keywords: string[];
+  slug: string;
+}
+
+export interface ContentItem {
+  id: string;
+  title: string;
+  description: string;
+  type: ContentType;
+  status: ContentStatus;
+  content: string;
+  authorId: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt?: string;
+  scheduledPublishAt?: string;
+  tags: string[];
+  views: number;
+  engagement: number;
+  version: number;
+  changelog: VersionEntry[];
+}
+
+export interface VersionEntry {
+  version: number;
+  updatedAt: string;
+  changes: string;
+  authorId: string;
+}
+
+export interface Contribution {
+  id: string;
+  title: string;
+  content: string;
+  type: ContentType;
+  submittedBy: string;
+  submittedAt: string;
+  status: 'pending' | 'approved' | 'rejected';
+  reviewedBy?: string;
+  reviewedAt?: string;
+  feedback?: string;
+}
+
+export interface Contributor {
+  id: string;
+  userId: string;
+  username: string;
+  bio: string;
+  contributions: number;
+  points: number;
+  badges: string[];
+  featured: boolean;
+  joinedAt: string;
+}
+
+export interface ContentAnalytics {
+  contentId: string;
+  views: number;
+  engagement: number;
+  averageTimeSpent: number;
+  completionRate: number;
+  likes: number;
+  shares: number;
+  comments: number;
+}
