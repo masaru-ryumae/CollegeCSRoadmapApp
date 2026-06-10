@@ -1,0 +1,489 @@
+.project-comparison-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+.comparison-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  gap: 16px;
+}
+
+.comparison-header h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #1a1a1a;
+}
+
+.comparison-header p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s ease;
+  padding: 4px 8px;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+.comparison-layout {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 32px;
+}
+
+.selection-panel,
+.comparison-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.selection-panel {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+}
+
+.selection-panel h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  color: #1a1a1a;
+}
+
+.user-profile-section {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.profile-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.control-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+}
+
+.select-input,
+.range-slider {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+  background: white;
+  cursor: pointer;
+}
+
+.range-slider {
+  padding: 0;
+  height: 6px;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.project-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0;
+}
+
+.project-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.project-checkbox:hover {
+  border-color: #4a90e2;
+  background: #f0f6ff;
+}
+
+.project-checkbox.selected {
+  border-color: #4a90e2;
+  background: #e8f1ff;
+}
+
+.project-checkbox input {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  accent-color: #4a90e2;
+}
+
+.project-info {
+  flex: 1;
+}
+
+.project-info h4 {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  color: #1a1a1a;
+}
+
+.project-meta {
+  font-size: 11px;
+  color: #999;
+  margin: 0;
+}
+
+.analyze-btn {
+  padding: 8px 12px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  align-self: flex-start;
+  margin-left: 30px;
+}
+
+.analyze-btn:hover {
+  background: #357abd;
+}
+
+.analysis-details {
+  margin-left: 30px;
+  padding: 12px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.analysis-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.analysis-section h5 {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.analysis-section ul {
+  margin: 0;
+  padding-left: 16px;
+  list-style: disc;
+}
+
+.analysis-section li {
+  font-size: 11px;
+  color: #666;
+  line-height: 1.4;
+  margin: 2px 0;
+}
+
+.no-items {
+  color: #999;
+  font-style: italic;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 8px;
+  background: #e8f1ff;
+  color: #4a90e2;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.comparison-panel {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.comparison-panel.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: #999;
+  font-size: 16px;
+}
+
+.comparison-content h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  color: #1a1a1a;
+}
+
+.summary-section {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.summary-section h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.summary-section p {
+  font-size: 13px;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.differences-list {
+  margin: 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.differences-list li {
+  font-size: 13px;
+  color: #666;
+  margin: 6px 0;
+  line-height: 1.5;
+}
+
+.recommendation-box {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.recommendation-box h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.recommendation-box p {
+  font-size: 13px;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.comparison-table {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.comparison-table h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: #333;
+}
+
+.comparison-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.comparison-table th,
+.comparison-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.comparison-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+}
+
+.comparison-table td {
+  color: #666;
+}
+
+.comparison-table tr:nth-child(even) {
+  background: #fafbfc;
+}
+
+.scoring-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.scoring-section h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  color: #333;
+}
+
+.scores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.score-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  background: #fafbfc;
+}
+
+.score-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.project-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.overall-score {
+  font-size: 24px;
+  font-weight: 700;
+  color: #4a90e2;
+}
+
+.score-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.score-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.score-item > span:first-child {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+}
+
+.score-bar {
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.score-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4a90e2 0%, #2d5aa4 100%);
+  transition: width 0.3s ease;
+}
+
+.score-value {
+  font-size: 11px;
+  color: #999;
+  text-align: right;
+}
+
+@media (max-width: 1200px) {
+  .comparison-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .selection-panel {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-comparison-container {
+    padding: 16px;
+  }
+
+  .comparison-header {
+    flex-direction: column;
+  }
+
+  .comparison-header h2 {
+    font-size: 24px;
+  }
+
+  .project-list {
+    max-height: 400px;
+  }
+
+  .scores-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-table {
+    font-size: 12px;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 8px;
+  }
+}
