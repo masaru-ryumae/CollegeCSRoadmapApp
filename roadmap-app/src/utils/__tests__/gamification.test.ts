@@ -3,7 +3,7 @@ import { describe, it, expect } from 'vitest';
 import {
   checkBadgeRequirements,
   BADGES,
-  BadgeRarity
+  type BadgeRarity
 } from '../badgeSystem';
 import {
   calculateLevel,
@@ -246,9 +246,9 @@ describe('Streak System', () => {
 
 describe('Leaderboard System', () => {
   const mockUsers = [
-    { userId: 'user-1', username: 'Alice', level: 30, totalXP: 85000, projectsCompleted: 15, currentStreak: 12, longestStreak: 45, communityLikes: 250, badge_count: 18 },
-    { userId: 'user-2', username: 'Bob', level: 25, totalXP: 65000, projectsCompleted: 12, currentStreak: 8, longestStreak: 30, communityLikes: 180, badge_count: 14 },
-    { userId: 'user-3', username: 'Carol', level: 35, totalXP: 105000, projectsCompleted: 20, currentStreak: 18, longestStreak: 60, communityLikes: 320, badge_count: 22 }
+    { userId: 'user-1', username: 'Alice', level: 30, totalXP: 85000, projectsCompleted: 15, currentStreak: 12, longestStreak: 45, communityLikes: 250, badgeCount: 18 },
+    { userId: 'user-2', username: 'Bob', level: 25, totalXP: 65000, projectsCompleted: 12, currentStreak: 8, longestStreak: 30, communityLikes: 180, badgeCount: 14 },
+    { userId: 'user-3', username: 'Carol', level: 35, totalXP: 105000, projectsCompleted: 20, currentStreak: 18, longestStreak: 60, communityLikes: 320, badgeCount: 22 }
   ];
 
   it('should rank users by XP correctly', () => {

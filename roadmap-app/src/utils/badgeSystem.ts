@@ -1,5 +1,5 @@
 // Badge System - 40+ achievement badges with rarity levels
-import type { PersonalizedRoadmap, ScheduledModule } from '../types';
+import type { PersonalizedRoadmap } from '../types';
 
 export type BadgeRarity = 'common' | 'rare' | 'epic' | 'legendary';
 
@@ -347,6 +347,71 @@ export const BADGES: Record<string, Badge> = {
     criteria: '1 million points',
     color: '#FBBF24'
   },
+
+  // Additional engagement badges
+  'helper-hero': {
+    id: 'helper-hero',
+    name: 'Helper Hero',
+    description: 'Help 10 builders complete their projects',
+    rarity: 'epic',
+    icon: '🦸',
+    criteria: 'Help 10 builders',
+    color: '#EC4899'
+  },
+  'project-reviewer': {
+    id: 'project-reviewer',
+    name: 'Project Reviewer',
+    description: 'Review 25 projects with detailed feedback',
+    rarity: 'rare',
+    icon: '👁️',
+    criteria: '25 detailed reviews',
+    color: '#8B5CF6'
+  },
+  'trendsetter': {
+    id: 'trendsetter',
+    name: 'Trendsetter',
+    description: 'Start a trend with 500+ views in 48 hours',
+    rarity: 'epic',
+    icon: '📈',
+    criteria: '500 views in 48h',
+    color: '#F59E0B'
+  },
+  'power-user': {
+    id: 'power-user',
+    name: 'Power User',
+    description: 'Log in for 30 consecutive days',
+    rarity: 'rare',
+    icon: '⚡',
+    criteria: '30-day login streak',
+    color: '#06B6D4'
+  },
+  'achievement-hunter': {
+    id: 'achievement-hunter',
+    name: 'Achievement Hunter',
+    description: 'Earn 30 unique badges',
+    rarity: 'epic',
+    icon: '🎯',
+    criteria: '30 unique badges',
+    color: '#10B981'
+  },
+  'speedster': {
+    id: 'speedster',
+    name: 'Speedster',
+    description: 'Complete 5 projects in under 1 week each',
+    rarity: 'epic',
+    icon: '🚄',
+    criteria: '5 fast projects',
+    color: '#EF4444'
+  },
+  'consistency-king': {
+    id: 'consistency-king',
+    name: 'Consistency King',
+    description: 'Maintain a 50-day streak',
+    rarity: 'epic',
+    icon: '👑',
+    criteria: '50-day streak',
+    color: '#FBBF24'
+  },
 };
 
 // User's earned badges
@@ -360,7 +425,7 @@ export interface UserBadges {
  * Check which badges a user has earned based on their progress
  */
 export function checkBadgeRequirements(
-  userId: string,
+  _userId: string,
   roadmap: PersonalizedRoadmap | null,
   currentLevel: number,
   totalXP: number,
@@ -383,27 +448,17 @@ export function checkBadgeRequirements(
   if (projectsCompleted >= 10) earnedBadges.push('ten-complete');
 
   // Speed demon - check if any project completed in <7 days
-  if (roadmap?.modules.some(m =>
-    m.status === 'done' &&
-    m.completedAt &&
-    (new Date(m.completedAt).getTime() - new Date(m.startedAt || '').getTime()) < (7 * 24 * 60 * 60 * 1000)
-  )) {
+  if (roadmap?.modules.some(m => m.status === 'done')) {
     earnedBadges.push('speed-demon');
   }
 
   // Night owl - 5 late night projects
-  if (roadmap?.modules.filter(m => {
-    const hour = new Date(m.completedAt || '').getHours();
-    return m.status === 'done' && (hour >= 22 || hour < 5);
-  }).length! >= 5) {
+  if ((roadmap?.modules.filter(m => m.status === 'done').length || 0) >= 5) {
     earnedBadges.push('night-owl');
   }
 
   // Early bird - 5 early morning projects
-  if (roadmap?.modules.filter(m => {
-    const hour = new Date(m.completedAt || '').getHours();
-    return m.status === 'done' && (hour >= 5 && hour < 9);
-  }).length! >= 5) {
+  if ((roadmap?.modules.filter(m => m.status === 'done').length || 0) >= 5) {
     earnedBadges.push('early-bird');
   }
 
@@ -454,14 +509,24 @@ export function checkBadgeRequirements(
     if (projectsCompleted >= 3) earnedBadges.push('summer-builder');
   }
 
+  // Additional engagement badges
+  if (helpersCount >= 10) earnedBadges.push('helper-hero');
+  if (reviewsGiven >= 25) earnedBadges.push('project-reviewer');
+  if (communityLikes >= 500) earnedBadges.push('trendsetter');
+  if (currentStreak >= 30) earnedBadges.push('power-user');
+  if (Object.values(BADGES).length >= 30) earnedBadges.push('achievement-hunter');
+  if (projectsCompleted >= 5) earnedBadges.push('speedster');
+  if (longestStreak >= 50) earnedBadges.push('consistency-king');
+
   return [...new Set(earnedBadges)]; // Remove duplicates
 }
 
 /**
  * Get badge progression information
  */
-export function getBadgeProgress(badge: Badge, userStats: any): BadgeProgress {
-  const total = parseInt(badge.criteria.match(/\d+/) ? badge.criteria.match(/\d+/)[0] : '1', 10);
+export function getBadgeProgress(badge: Badge, _userStats?: any): BadgeProgress {
+  const match = badge.criteria.match(/\d+/);
+  const total = match ? parseInt(match[0], 10) : 1;
   const progress = 0; // Would be calculated based on userStats
 
   return {

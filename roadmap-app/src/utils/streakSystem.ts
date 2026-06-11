@@ -111,7 +111,6 @@ export function calculateCurrentStreak(dailyActivity: DailyActivity[]): number {
   // Count consecutive days backward
   let expectedDate = new Date(currentDate);
   for (const activity of sortedActivities) {
-    const activityDate = new Date(activity.date);
     const expectedDateString = expectedDate.toISOString().split('T')[0];
 
     if (activity.date === expectedDateString && activity.completed) {

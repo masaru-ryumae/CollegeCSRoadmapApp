@@ -8,7 +8,7 @@ export interface UserRankingData {
   currentStreak: number;
   longestStreak: number;
   communityLikes: number;
-  badge count: number;
+  badgeCount: number;
 }
 
 export interface RankedUser extends UserRankingData {
@@ -47,7 +47,7 @@ export interface SeasonalCompetition {
  */
 export function calculateRankings(
   users: UserRankingData[],
-  period: 'weekly' | 'monthly' | 'seasonal' | 'all-time',
+  _period: 'weekly' | 'monthly' | 'seasonal' | 'all-time',
   previousRankings?: RankedUser[]
 ): RankedUser[] {
   // Sort by XP (primary metric)
@@ -87,7 +87,7 @@ export function getLeaderboard(
   period: 'weekly' | 'monthly' | 'seasonal' | 'all-time' = 'all-time'
 ): Leaderboard {
   // Filter by category if specified
-  const filteredUsers = category ? allUsers.filter(u => {
+  const filteredUsers = category ? allUsers.filter(() => {
     // This would depend on user category preference
     // For now, we'll return all users
     return true;
