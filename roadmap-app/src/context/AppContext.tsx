@@ -122,7 +122,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
           dispatch({ type: 'TOGGLE_DARK_MODE' });
         }
         if (parsed.favorites) {
-          dispatch({ type: 'SET_FAVORITES'; favorites: parsed.favorites });
+          dispatch({ type: 'SET_FAVORITES', favorites: parsed.favorites });
         }
       } catch (e) {
         console.warn('Failed to load saved state', e);
@@ -141,14 +141,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
         const user = await getCurrentUser();
         if (user) {
-          dispatch({ type: 'SET_USER'; user });
-          dispatch({ type: 'SET_AUTHENTICATED'; isAuthenticated: true });
+          dispatch({ type: 'SET_USER', user });
+          dispatch({ type: 'SET_AUTHENTICATED', isAuthenticated: true });
         }
 
         // Setup auth state listener
         const unsubscribe = onAuthStateChanged((user) => {
-          dispatch({ type: 'SET_USER'; user });
-          dispatch({ type: 'SET_AUTHENTICATED'; isAuthenticated: user !== null });
+          dispatch({ type: 'SET_USER', user });
+          dispatch({ type: 'SET_AUTHENTICATED', isAuthenticated: user !== null });
         });
 
         return unsubscribe;
@@ -178,7 +178,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       const syncToCloud = async () => {
         try {
           const { syncFavoritesToCloud, syncAnswersToCloud, syncRoadmapToCloud } = await import('../services/cloudSync');
-          dispatch({ type: 'SET_SYNCING'; isSyncing: true });
+          dispatch({ type: 'SET_SYNCING', isSyncing: true });
 
           if (state.favorites.length > 0) {
             await syncFavoritesToCloud(state.user!.id, state.favorites);
@@ -190,10 +190,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
             await syncRoadmapToCloud(state.user!.id, state.roadmap);
           }
 
-          dispatch({ type: 'SET_SYNCING'; isSyncing: false });
+          dispatch({ type: 'SET_SYNCING', isSyncing: false });
         } catch (e) {
           console.warn('Failed to sync to cloud', e);
-          dispatch({ type: 'SET_SYNCING'; isSyncing: false });
+          dispatch({ type: 'SET_SYNCING', isSyncing: false });
         }
       };
 
