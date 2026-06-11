@@ -63,3 +63,31 @@ export {
   type CohortComparison,
   type FocusArea
 } from './performanceML';
+
+// Chart Engine exports
+export {
+  default as chartEngine,
+  type ChartDataPoint,
+  type LineChartConfig,
+  type BarChartConfig,
+  type PieChartConfig,
+  type RadarChartConfig,
+  type HeatmapData
+} from './chartEngine';
+
+// Report Generator exports
+export {
+  default as reportGenerator,
+  type ReportMetrics,
+  type MonthlyReportData,
+  type SkillReport,
+  type LearningSpeedAnalysis
+} from './reportGenerator';
+
+// Insights Engine exports
+export {
+  default as insightEngine,
+  type UserMetrics,
+  type Insight,
+  type TrendData
+} from './insightEngine';
